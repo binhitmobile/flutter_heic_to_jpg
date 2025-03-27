@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     if (initialized) return;
     initialized = true;
-    WidgetsBinding.instance!.addPostFrameCallback((Duration timeStamp) async {
+    WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) async {
       String? tmp = await showDialog(
         builder: (context) => FutureProgressDialog(downloadAndConvert()),
           context: context,

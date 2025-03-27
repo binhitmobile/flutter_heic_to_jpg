@@ -9,7 +9,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.plugin.common.PluginRegistry.Registrar
 
 /** HeicToJpgPlugin */
 class HeicToJpgPlugin : FlutterPlugin, MethodCallHandler {
@@ -32,11 +31,8 @@ class HeicToJpgPlugin : FlutterPlugin, MethodCallHandler {
             ) {
                 val handler = Handler(Looper.getMainLooper())
                 Thread {
-                    var jpgPath = call.argument<String>("jpgPath")
-                    if (jpgPath.isNullOrEmpty()) {
-                        jpgPath =
-                            "${applicationContext?.cacheDir}/${System.currentTimeMillis()}.jpg"
-                    }
+                    val jpgPath =
+                        "${applicationContext?.cacheDir}/${System.currentTimeMillis()}.jpg"
                     val output = convertHeicToJpeg(call.argument<String>("heicPath")!!, jpgPath)
                     handler.post {
                         if (output != null) {
